@@ -12,6 +12,17 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+
+      this.belongsTo(models.Users, {
+        targetKey: 'userId',
+        foreignKey: 'userId',
+      });
+
+      this.hasMany(models.Comments, {
+        sourceKey: 'postId',
+        foreignKey: 'postId',
+      });
+
     }
   }
   Posts.init({
@@ -22,7 +33,7 @@ module.exports = (sequelize, DataTypes) => {
       type: Sequelize.INTEGER
     },
     userId: {
-      type: Sequelize.STRING,
+      type: Sequelize.INTEGER,
       allowNull: false
     },
     nickname: {
@@ -38,7 +49,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false
     },
     likes: {
-      type: Sequelize.STRING,
+      type: Sequelize.INTEGER
     },
     createdAt: {
       allowNull: false,
